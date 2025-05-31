@@ -23,7 +23,7 @@ YelpCamp is a full-stack web application that allows users to discover, create, 
 
 **Database:**
 - MongoDB (via Mongoose)
-
+  
 **Other Integrations:**
 - Cloudinary (for image storage)
 - Multer (file uploads)
