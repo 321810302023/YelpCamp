@@ -31,5 +31,3 @@ YelpCamp is a full-stack web application that allows users to discover, create, 
 - Express-session & connect-flash
 - Passport.js (for user auth)
 
-## 📂 Project Structure
-
