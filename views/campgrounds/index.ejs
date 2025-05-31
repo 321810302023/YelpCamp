@@ -1,0 +1,54 @@
+<% layout('layouts/boilerplate') %>
+    <div id="cluster-map"></div>
+    <h1>Campgrounds List</h1>
+
+    <a href="/campgrounds/new"><button>Add new Campground</button></a>
+    <% for(let campground of campgrounds){ %>
+        <div class="card mb-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <% if (campground.images.length) { %>
+                        <img class="img-fluid" alt="" src="<%=campground.images[0].url%>">
+                        <% }else { %>
+                            <img class="img-fluid" alt=""
+                                src="https://res.cloudinary.com/dwopzotne/image/upload/v1746406532/YelpCamp/m0yjudppmxcfifcpx2n1.jpg">
+                            <% } %>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= campground.name %>
+                        </h5>
+                        <p class="card-text">
+                            <%= campground.discription %>
+                        </p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                <%= campground.location %>
+                            </small>
+                        </p>
+                        <a href="/campgrounds/<%= campground._id %>"><button class="btn btn-success">
+                                <%= campground.name %>
+                            </button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+            <script>
+                const maptilerApiKey = "<%= maptilerApiKey %>";
+            </script>
+            <script>
+                const campgrounds = JSON.parse(`features: <%- JSON.stringify(
+                campgrounds.map(c => ({
+                    type: "Feature",
+                    geometry: c.geometry,
+                    properties: {
+                        title: c.name,
+                        location: c.location,
+                        popUpMarkup: `< h3 > ${ c.name }</h3 > <p>${c.location}</p>`
+                    }
+                }))
+            ) %>`);
+            </script>
+            <script src="/javascript/clusterMap.js"></script>
